@@ -12,14 +12,19 @@ type Todo = {
 // propsの型定義
 type TodoListProps = {
   todos: Todo[];
+  onTodoDelete: (todoId: number) => void;
 };
 
 
-const TodoList: React.FC<TodoListProps> = ({ todos }) => {
+const TodoList: React.FC<TodoListProps> = ({ todos, onTodoDelete }) => {
+  const handleTodoDelete = (todoId: number) => {
+    onTodoDelete(todoId);
+  };
+
   return (
     <ul className="todo-list">
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todo={todo} onDelete={handleTodoDelete} />
       ))}
     </ul>
   );
